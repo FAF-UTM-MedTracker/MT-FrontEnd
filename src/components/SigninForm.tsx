@@ -11,13 +11,10 @@ const SigninForm: React.FC = () => {
     const [form] = useForm()
     const navigate = useNavigate()
 
-    const { loading, error, success } = useAppSelector(
+    const { loading, error, success, userToken } = useAppSelector(
         (state) => state.auth
       )
-
-    // const { users } = useAppSelector((state) => ({ ...state.auth }))
     const dispatch = useAppDispatch()
-
 
     const onFinish = async (data: any) => {
         const { email, uPassword } = await form.validateFields();
@@ -25,10 +22,15 @@ const SigninForm: React.FC = () => {
     };
 
     useEffect(() => {
-        if (success) console.log("logged in")
+        const val = localStorage.getItem('loggedIn')
+        // const authenticated = Boolean(val) ? JSON.parse(val) : false
+
+        if (userToken) {
+            console.log("logged in")
+            navigate('/patients')
+        }
         if (error) console.log('error:',error)
-        // if (userInfo) navigate('/user-profile')
-    }, [navigate, success, error])
+    }, [navigate, success, error, userToken])
 
 
     return (
@@ -54,7 +56,18 @@ const SigninForm: React.FC = () => {
                 rules={[{ required: true, message: 'Please input your password!' }]}
             >
                 <Input.Password />
+                
+
             </Form.Item>
+                <div style={{ 
+                    marginTop:'-15px',
+                    marginBottom:'15px',
+                    marginRight:'60px',
+                    display: 'flex', 
+                    justifyContent:'right'}}> 
+                    <a>Forgot password?</a>
+                </div>
+            
 
             <div  style={{ 
                 margin:'0 auto',
@@ -62,7 +75,7 @@ const SigninForm: React.FC = () => {
                 justifyContent:'center'
             }}>
                 {success?(
-                    <Alert message={"Signed in successfully"} type='success' showIcon style={{marginBottom:'10px'}}/>)
+                    (<div></div>))
                     :error?(<Alert message={error} type='error' showIcon style={{marginBottom:'10px'}}/>)
                     :(<div></div>)
                 }
@@ -73,7 +86,7 @@ const SigninForm: React.FC = () => {
                     Sign in
                 </Button>
             </Form.Item>
-            <p style={{color:'black', textAlign:'center'}}>Don't have an account? <a href="/signup">Sign up</a> </p>
+            <p style={{color:'black', textAlign:'center', marginTop:'-20px'}}>Don't have an account? <a href="/signup">Sign up</a> </p>
         </Form>
     );
 };

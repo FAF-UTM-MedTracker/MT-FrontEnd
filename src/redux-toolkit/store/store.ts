@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { authReducer } from '../slices/authSlice'
+import { treatmentReducer } from '../slices/treatmentSlice'
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer
+    auth: authReducer,
+    treatments: treatmentReducer
   },
 })
 

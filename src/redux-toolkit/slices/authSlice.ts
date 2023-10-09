@@ -18,7 +18,7 @@ export const registerUser = createAsyncThunk(
       }
       console.log(credentials)
       await axios.post(
-        `${backendURL}/auth/register`,
+        `${backendURL}/auth/register/doctor`,
         credentials
         // config
       ).then((res)=>res.data)
@@ -53,7 +53,8 @@ export const userLogin = createAsyncThunk(
         // config
       )
       // store user's token in local storage
-      localStorage.setItem('userToken', data.userToken)
+      localStorage.setItem('loggedIn', 'true')
+      localStorage.setItem('userToken', data.jwt)
       return data
     } catch (error:any) {
       // return custom error message from API if any
@@ -70,20 +71,27 @@ const userToken = localStorage.getItem('userToken')
   ? localStorage.getItem('userToken')
   : null
 
-
 const initialState = {
   loading: false,
-  userInfo: {}, // for user object
+  userInfo: null, 
   userToken,
   error: null,
-  success: false, // for monitoring the registration process.
+  success: false, 
 }
 
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      localStorage.removeItem('userToken')
+      state.loading = false
+      state.userInfo = null
+      state.userToken = null
+      state.error = null
+    },
+  },
   extraReducers: (builder) =>  {
       builder
       .addCase(registerUser.pending, (state,action: PayloadAction<any>) => {
@@ -94,7 +102,8 @@ const authSlice = createSlice({
       
       .addCase(registerUser.fulfilled, (state, action: PayloadAction<any>) => {
           state.loading = false
-          state.success = true // registration successful
+          state.success = true
+          state.error = null
       })
       .addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
           state.loading = false
@@ -110,17 +119,16 @@ const authSlice = createSlice({
     .addCase(userLogin.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false
         // state.userInfo = action.payload
-        // state.userToken = action.payload.userToken
-        state.success = true // registration successful
+        state.userToken = action.payload.jwt
+        state.success = true
     })
     .addCase(userLogin.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false
         state.error = action.payload
-        // state.message = action.payload.message
     })
 
   },
 })
-  
+  export const {logout} = authSlice.actions
   export const authReducer = authSlice.reducer
 

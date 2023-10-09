@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { PasswordInput } from 'antd-password-input-strength';
 import { useAppDispatch, useAppSelector } from '../redux-toolkit/hooks/hooks';
 import { authReducer, registerUser } from '../redux-toolkit/slices/authSlice';
-
+import PhoneInput from "antd-phone-input";
 
 
 const SignupForm: React.FC = () => {
@@ -26,16 +26,14 @@ const SignupForm: React.FC = () => {
 
 
     const onFinish = async (data: any) => {
-        const {name, surname, email, uPassword, confirm_password } = await form.validateFields();
-        const doctor = true
-        console.log('password:', uPassword)
-        dispatch(registerUser({email, uPassword, doctor:true}))
+        const {firstName, lastName, phoneNumber, email, uPassword, confirm_password } = await form.validateFields();
+        dispatch(registerUser({firstName, lastName, email, "phoneNumber":`+${phoneNumber.countryCode }${phoneNumber.areaCode}${phoneNumber.phoneNumber}`,uPassword, "isDoctor":true}))
     };
 
     useEffect(() => {
         if (success) {
             console.log("registered")
-            if (success) navigate('/')
+            navigate('/login')
         }
         if (error) console.log('error:',error)
     }, [navigate, success, error])
@@ -43,7 +41,7 @@ const SignupForm: React.FC = () => {
 
     return (
         <Form
-            labelCol={{ span: 7 }}
+            labelCol={{ span: 9 }}
             wrapperCol={{ span: 13 }}
             component={false}
             form={form}
@@ -51,7 +49,7 @@ const SignupForm: React.FC = () => {
         >
             <Form.Item
                 label="First name"
-                name="name"
+                name="firstName"
                 rules={[{ required: true, message: 'Please input your first name!' }]}
             >
                 <Input />
@@ -59,16 +57,34 @@ const SignupForm: React.FC = () => {
 
             <Form.Item
                 label="Surname"
-                name="surname"
+                name="lastName"
                 rules={[{ required: true, message: 'Please input your surname!' }]}
             >
                 <Input />
             </Form.Item>
 
             <Form.Item
+                label="Phone Number"
+                name="phoneNumber"
+                rules={[{ required: true, 
+                    // message: 'Please input your phone number!', 
+                    validator: (_, {valid}) => {
+                        if (valid()) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject("Invalid phone number");
+                      }
+                }]}
+            >
+                <PhoneInput size='large'
+                    enableSearch/>
+            </Form.Item>
+
+            <Form.Item
                 label="Email"
                 name="email"
-                rules={[{ required: true, message: 'Please input a valid email!', type: 'email' }]}
+                rules={[{ required: true, 
+                    message: 'Please input a valid email!', type: 'email' }]}
             >
                 <Input />
             </Form.Item>
@@ -108,7 +124,7 @@ const SignupForm: React.FC = () => {
                           if (!value || getFieldValue('uPassword') === value) {
                             return Promise.resolve();
                           }
-                          return Promise.reject(new Error('The new password that you entered do not match!'));
+                          return Promise.reject(new Error('The passwords do not match!'));
                         },
                       }),
 
@@ -122,7 +138,7 @@ const SignupForm: React.FC = () => {
                 justifyContent:'center'
             }}>
                 {success?(
-                    <Alert message={"Signed up successfully"} type='success' showIcon style={{marginBottom:'10px'}}/>)
+                    (<div></div>))
                     :error?(<Alert message={error} type='error' showIcon style={{marginBottom:'10px'}}/>)
                     :(<div></div>)
                 }
@@ -132,7 +148,7 @@ const SignupForm: React.FC = () => {
                     Sign up
                 </Button>
             </Form.Item>
-            <p style={{color:'black', textAlign:'center'}}>Already have an account? <a href="/">Sign in</a> </p>
+            <p style={{color:'black', textAlign:'center'}}>Already have an account? <a href="/login">Sign in</a> </p>
         </Form>
     );
 };

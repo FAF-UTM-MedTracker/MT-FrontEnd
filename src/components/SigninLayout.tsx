@@ -38,8 +38,8 @@ const SigninLayout: React.FC = () => {
       display: 'flex', justifyContent:'center'}}>
 
         <div className='rectangle' style={{display: 'inline-block', 
-        width: '30vw', 
-        height: '40vh',
+        width: 'fit-content', 
+        height: 'fit-content',
         background: 'white',
         margin:'0 auto',
         borderRadius:'50px'

@@ -1,17 +1,16 @@
-import { Layout, theme} from 'antd';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import SignupForm from './SignupForm';
+import { NavLink, Outlet } from 'react-router-dom'
+import { useAppSelector } from '../redux-toolkit/hooks/hooks'
+import { Button, Layout, Result } from 'antd';
 
 const { Header, Content, Footer } = Layout;
 
-const SignupLayout: React.FC = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+const PageNotFound: React.FC = () => {
+  const { userInfo, success } = useAppSelector((state) => state.auth)
 
-  return (
-    <Layout
+  // show unauthorized screen if no user is found in redux store
+  if (!success) {
+    return (
+        <Layout
       style={{
         width: '100vw',
         height: '100vh',
@@ -36,20 +35,21 @@ const SignupLayout: React.FC = () => {
       backgroundImage:'linear-gradient(lightblue, white)', 
       display: 'flex', justifyContent:'center'}}>
 
-        <div className='rectangle' style={{display: 'inline-block', 
-        width: 'fit-content', 
-        height: 'fit-content',
-        background: 'white',
-        margin:'0 auto',
-        borderRadius:'50px'
-        }}>
-          <h1 style={{color: 'black', textAlign:'center'}}>Sign up</h1>
-          <SignupForm/>
-        </div>
+        <Result
+            status="404"
+            title="404"
+            subTitle="Sorry, the page you visited does not exist."
+            extra={<Button type="primary">Back Home</Button>}
+        />
         
       </Content>
       <Footer style={{ textAlign: 'center' }}>MedTracker ©2023 Created by PBL Team 10, FAF 3rd year</Footer>
     </Layout>
-  );
-};
-export default SignupLayout;
+        
+    )
+  }
+
+  // returns child route elements
+  return <Outlet />
+}
+export default PageNotFound

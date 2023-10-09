@@ -7,12 +7,16 @@ import SignupLayout from './components/SignupLayout.tsx'
 import {
   BrowserRouter as Router,
   Route,
-  Routes
+  Routes,
+  Navigate
 } from "react-router-dom";
 
 import { Provider } from 'react-redux'
 import { store } from './redux-toolkit/store/store'
 import SigninLayout from './components/SigninLayout.tsx';
+import PatientsPage from './components/PatientsPage.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
+import PageNotFound from './components/PageNotFound.tsx';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -20,7 +24,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Router>
         <Routes>
           <Route path="/signup" element={<SignupLayout/>}/>
-          <Route path="/" element={<SigninLayout/>}/>
+          <Route path="/login" element={<SigninLayout/>}/>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/patients" element={<PatientsPage/>}/>
+          </Route>
+          <Route path='*' element={<PageNotFound/>} />
         </Routes>
       </Router>
     </Provider>
