@@ -40,6 +40,7 @@ const SigninForm: React.FC = () => {
             component={false}
             form={form}
             size="large"
+            // style={{minHeight:'50vh', minWidth:'300px'}}
         >
 
             <Form.Item
@@ -86,6 +87,7 @@ const SigninForm: React.FC = () => {
                     Sign in
                 </Button>
             </Form.Item>
+            <br />
             <p style={{color:'black', textAlign:'center', marginTop:'-20px'}}>Don't have an account? <a href="/signup">Sign up</a> </p>
         </Form>
     );

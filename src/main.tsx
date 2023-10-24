@@ -17,6 +17,7 @@ import SigninLayout from './components/SigninLayout.tsx';
 import PatientsPage from './components/PatientsPage.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import PageNotFound from './components/PageNotFound.tsx';
+import PatientsPageV2 from './components/PatientsPageV2.tsx';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -25,8 +26,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Routes>
           <Route path="/signup" element={<SignupLayout/>}/>
           <Route path="/login" element={<SigninLayout/>}/>
+          <Route path="/" element={<SigninLayout/>}/>
           <Route element={<ProtectedRoute />}>
-            <Route path="/patients" element={<PatientsPage/>}/>
+            <Route path="/patients" element={<PatientsPageV2/>}/>
           </Route>
           <Route path='*' element={<PageNotFound/>} />
         </Routes>

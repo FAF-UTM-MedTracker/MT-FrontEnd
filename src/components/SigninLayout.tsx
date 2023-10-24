@@ -27,22 +27,27 @@ const SigninLayout: React.FC = () => {
           width: '100%',
           display: 'flex',
           alignItems: 'center',
+          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+          backgroundColor: 'white'
         }}
       >
-        <div className="demo-logo" />
-        <img src="src/assets//pill.svg" style={{width:'50px', height:'50px', marginRight:'10px'}} />
-        <h1 style={{color:'white'}}>MedTracker</h1>
+          <img src="src/assets//pill.svg" style={{width:'50px', height:'50px', marginRight:'10px', marginTop:'5px', marginLeft:'-30px'}} />
+          <b style={{fontSize:'36px', verticalAlign:'top', alignSelf:'center'}}>MedTracker</b>
       </Header>
       <Content className="site-layout" style={{ padding: '10vh 50px', 
       backgroundImage:'linear-gradient(lightblue, white)', 
       display: 'flex', justifyContent:'center'}}>
 
         <div className='rectangle' style={{display: 'inline-block', 
+        minHeight:'400px', 
+        minWidth:'500px',
         width: 'fit-content', 
         height: 'fit-content',
         background: 'white',
         margin:'0 auto',
         borderRadius:'50px'
+        
+        
         }}>
           <h1 style={{color: 'black', textAlign:'center'}}>Sign in</h1>
           <SigninForm/>

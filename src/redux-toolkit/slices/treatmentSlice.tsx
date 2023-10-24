@@ -1,14 +1,39 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
-import { useAppSelector } from '../hooks/hooks';
-
 
 
 const backendURL = 'https://medtrackerapi.azurewebsites.net'
-// const { userToken } = useAppSelector(
-//             (state) => state.auth
-//         )
+
+export const updateTreatment = createAsyncThunk(
+  'Doctor/UpdateTreatment',
+  async (note: any, { rejectWithValue }) => {
+    try {
+        
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': 'Bearer token ' + localStorage.getItem('userToken')
+            },
+        }
+        await axios.post(
+          `${backendURL}/Doctor/UpdateTreatmentStatus`,
+          note,
+          config
+        )
+        
+
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message)
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+  }
+)
+
 export const getTreatments = createAsyncThunk(
   'Doctor/GetTreatments',
   async (_, { rejectWithValue }) => {
@@ -57,6 +82,7 @@ export interface ITreatment
     name: string,
     start: string,
     end: string,
+    status: string,
     note: string,
     meds: IMedication[]
 }
@@ -74,7 +100,24 @@ const initialState: TreatmentState = {
     loading: false,
     error: null,
     success: false,
-    treatments:[]
+    treatments:[{
+      id: 0,
+      name: '',
+      start: '',
+      end:'',
+      status: '',
+      note:'',
+      meds:[{
+        id: 0,
+        idTreatment: 0,
+        name: '',
+        description: '',
+        start: '',
+        end: '',
+        timeUse: '',
+        quantity: 1
+      }]
+    }]
 }
 
 
@@ -93,7 +136,8 @@ const treatmentSlice = createSlice({
                 name: element.tName,
                 start: element.start_Time,
                 end: element.end_Time,
-                note: element.note,
+                status: element.statusTreatment,
+                note: element.noteDoctor,
                 meds: element.medications.map((med: any)=>{
                     return{
                         id: med.idMedication,
@@ -109,7 +153,6 @@ const treatmentSlice = createSlice({
                 })
             }
         })
-        console.log('extra reducer',newData)
         state.treatments = newData
     })
     .addCase(getTreatments.pending, (state,action: PayloadAction<any>) => {
@@ -127,6 +170,6 @@ const treatmentSlice = createSlice({
     })
   },
 })
-//   export const {logout} = treatmentSlice.actions
+
   export const treatmentReducer = treatmentSlice.reducer
 
