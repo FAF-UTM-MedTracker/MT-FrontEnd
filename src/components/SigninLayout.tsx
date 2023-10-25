@@ -15,7 +15,8 @@ const SigninLayout: React.FC = () => {
     <Layout
       style={{
         width: '100vw',
-        height: '100vh',
+        minHeight: '100vh',
+        height: 'fit-content',
         boxSizing:  'border-box'
       }}>
       <Header
