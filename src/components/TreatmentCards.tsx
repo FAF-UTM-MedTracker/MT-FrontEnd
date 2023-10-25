@@ -12,8 +12,6 @@ import {
   Empty,
   Spin
 } from 'antd';
-// @ts-ignore
-import * as cloneDeep from 'lodash/cloneDeep';
 import { UserOutlined, 
   MedicineBoxTwoTone, 
   EditOutlined, 
@@ -45,7 +43,7 @@ const {patients, patientTreatments} = useAppSelector(
 
   const combinePatientData = () =>{
 
-    let temp = cloneDeep(patients) 
+    let temp = JSON.parse(JSON.stringify(patients))
 
     for(let key in patients)
     {
