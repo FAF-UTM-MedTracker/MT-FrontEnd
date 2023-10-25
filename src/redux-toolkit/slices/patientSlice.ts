@@ -87,7 +87,7 @@ interface PatientState
 
 
 const initialState: PatientState ={
-    patients: null,
+    patients: {},
     patientTreatments: []
 }
 

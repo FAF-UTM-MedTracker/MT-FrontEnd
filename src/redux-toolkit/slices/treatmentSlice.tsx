@@ -154,6 +154,8 @@ const treatmentSlice = createSlice({
             }
         })
         state.treatments = newData
+        state.loading = false
+        state.success = true
     })
     .addCase(getTreatments.pending, (state,action: PayloadAction<any>) => {
         state.loading = true

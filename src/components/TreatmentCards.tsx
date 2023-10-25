@@ -8,7 +8,9 @@ import {
   Modal, 
   Tooltip,
   Popconfirm, 
-  Popover
+  Popover,
+  Empty,
+  Spin
 } from 'antd';
 import * as cloneDeep from 'lodash/cloneDeep';
 import { UserOutlined, 
@@ -38,7 +40,7 @@ const {patients, patientTreatments} = useAppSelector(
         (state) => state.patients
     )
 
-    const {treatments} = useAppSelector(
+    const {treatments, loading} = useAppSelector(
         (state) => state.treatments)
 
   const combinePatientData = () =>{
@@ -271,7 +273,19 @@ if(treatments.length>0)
 
 
   return (
-    <div>{patientList}</div>
+    <div>
+    {loading?(
+      <Spin style={{fontSize:'50px'}} size="large"/>
+    )
+    :Object.keys(tempPatients).length <1? (
+      <Empty
+        description={'Not monitoring any patients currently.'}
+      />
+    )
+    :<div>{patientList}</div>
+  }
+  </div>
+    
   );
 };
 export default TreatmentCards;
