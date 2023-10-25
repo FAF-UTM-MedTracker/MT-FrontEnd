@@ -72,7 +72,7 @@ const PatientsPage: React.FC = () => {
           </Tooltip>
 
       </Header>
-      <Content className="site-layout" style={{ padding: '5vh 50px', 
+      <Content className="site-layout" style={{ padding: '2vh 50px', 
         backgroundImage:'linear-gradient(lightblue, lightgray)', 
         minHeight:'85vh',
         display: 'flex', 
