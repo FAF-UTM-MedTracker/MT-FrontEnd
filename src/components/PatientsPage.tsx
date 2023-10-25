@@ -227,7 +227,7 @@ const PatientsPage: React.FC = () => {
       >
         
           <div className="demo-logo" />
-          <img src="src/assets//pill.svg" style={{width:'50px', height:'50px', marginRight:'10px', marginTop:'5px'}} />
+          <img src="/pill.png" style={{width:'50px', height:'50px', marginRight:'10px', marginTop:'5px'}} />
           <b style={{color:'white', fontSize:'36px', verticalAlign:'top'}}>MedTracker</b>
           <Button onClick={onClick} size='large' style={{float:'right', marginTop:'10px'}}>Log out</Button>
       

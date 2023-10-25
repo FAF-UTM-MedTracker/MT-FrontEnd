@@ -31,7 +31,7 @@ const PageNotFound: React.FC = () => {
         }}
       >
         
-          <img src="src/assets//pill.svg" style={{width:'50px', height:'50px', marginRight:'10px', marginTop:'5px', marginLeft:'-30px'}} />
+          <img src="/pill.png" style={{width:'50px', height:'50px', marginRight:'10px', marginTop:'5px', marginLeft:'-30px'}} />
           <b style={{fontSize:'36px', verticalAlign:'top', alignSelf:'center'}}>MedTracker</b>
       </Header>
       <Content className="site-layout" style={{ padding: '10vh 50px', 

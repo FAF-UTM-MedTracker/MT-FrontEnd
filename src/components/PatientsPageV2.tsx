@@ -65,7 +65,7 @@ const PatientsPage: React.FC = () => {
         }}
       >
         
-          <img src="src/assets//pill.svg" style={{width:'50px', height:'50px', marginRight:'10px', marginTop:'5px', marginLeft:'-30px'}} />
+          <img src="/pill.png" style={{width:'50px', height:'50px', marginRight:'10px', marginTop:'5px', marginLeft:'-30px'}} />
           <b style={{fontSize:'36px', verticalAlign:'top', alignSelf:'center'}}>MedTracker</b>
           <Tooltip title='Log out'>
             <Button shape='circle' onClick={onClick} size='large' style={{float:'right', marginTop:'10px', marginRight:'-30px'}} icon={<LogoutOutlined />}/>

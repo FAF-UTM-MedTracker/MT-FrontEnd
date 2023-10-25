@@ -9,13 +9,13 @@ const outDir = resolve(__dirname, 'dist')
 export default defineConfig({
   plugins: [react()],
   build: {
-    emptyOutDir: true,
+    // emptyOutDir: true,
     
     rollupOptions: {
-      external:['prop-types'],
-      input: {
-        main: resolve(root, 'index.html'),
-      }
+      // external:['prop-types'],
+      // input: {
+      //   main: resolve(root, 'index.html'),
+      // }
     }
   }
 })
