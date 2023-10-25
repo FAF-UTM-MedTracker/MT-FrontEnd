@@ -10,6 +10,7 @@ export const registerUser = createAsyncThunk(
   'auth/register',
   async (credentials:any, { rejectWithValue }) => {
     try {
+      // @ts-ignore
       const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +39,7 @@ export const userLogin = createAsyncThunk(
   'auth/login',
   async (credentials: any, { rejectWithValue }) => {
     try {
-      // configure header's Content-Type as JSON
+      // @ts-ignore
       const config = {
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -94,12 +95,13 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) =>  {
       builder
+      // @ts-ignore
       .addCase(registerUser.pending, (state,action: PayloadAction<any>) => {
           state.loading = true
           state.success = false
           state.error = null
       })
-      
+      // @ts-ignore
       .addCase(registerUser.fulfilled, (state, action: PayloadAction<any>) => {
           state.loading = false
           state.success = true
@@ -109,7 +111,7 @@ const authSlice = createSlice({
           state.loading = false
           state.error = action.payload
       })
-
+// @ts-ignore
       .addCase(userLogin.pending, (state,action: PayloadAction<any>) => {
         state.loading = true
         state.success = false

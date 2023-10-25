@@ -1,11 +1,11 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { useAppSelector } from '../redux-toolkit/hooks/hooks'
 import { Button, Layout, Result } from 'antd';
 
 const { Header, Content, Footer } = Layout;
 
 const PageNotFound: React.FC = () => {
-  const { userInfo, success } = useAppSelector((state) => state.auth)
+  const {success } = useAppSelector((state) => state.auth)
   const navigate = useNavigate()
 
   // show unauthorized screen if no user is found in redux store

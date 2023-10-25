@@ -1,13 +1,12 @@
 import { Layout, theme} from 'antd';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import SignupForm from './SignupForm';
 
 const { Header, Content, Footer } = Layout;
 
 const SignupLayout: React.FC = () => {
   const {
-    token: { colorBgContainer },
+    token: {},
   } = theme.useToken();
 
   return (

@@ -28,14 +28,10 @@ const { Header, Content, Footer } = Layout;
 
 const PatientsPage: React.FC = () => {
     const {
-    token: { colorBgContainer },
+    token: {},
   } = theme.useToken();
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-
-  const { confirm } = Modal;
-
- 
 
   const onClick =()=> {
     dispatch(logout())
@@ -45,12 +41,6 @@ const PatientsPage: React.FC = () => {
   const {treatments} = useAppSelector(
       (state) => state.treatments
     )
-
-  const onRequest =()=> {
-    dispatch(getTreatments())
-    console.log(treatments);
-    
-  }
 
   let initialState: any = {}
 
@@ -127,13 +117,6 @@ const PatientsPage: React.FC = () => {
     if(treatments[i].status.toLowerCase() != "rejected")
   {
     medList[i]= [];
-
-    let treatmentColor = ''
-
-    if(treatments[i].status.toLowerCase() == "pending")
-    {
-      treatmentColor = 'lightyellow'
-    }
 
     for (let j = 0; j< treatments[i].meds.length; j++)
     {

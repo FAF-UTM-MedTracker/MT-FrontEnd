@@ -63,7 +63,7 @@ export const getPatients = createAsyncThunk(
       }
     }
   )
-
+// @ts-ignore
 interface IPatient
 {
     firstName: string,

@@ -1,6 +1,5 @@
-import { Breadcrumb, Layout, Menu, theme, Space } from 'antd';
+import {Layout, theme} from 'antd';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import SigninForm from './SigninForm';
 // import styled from 'styled-components';
 
@@ -8,7 +7,7 @@ const { Header, Content, Footer } = Layout;
 
 const SigninLayout: React.FC = () => {
   const {
-    token: { colorBgContainer },
+    token: { },
   } = theme.useToken();
 
   return (

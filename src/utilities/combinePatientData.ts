@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../redux-toolkit/hooks/hooks';
+import { useAppSelector } from '../redux-toolkit/hooks/hooks';
 
 export const combinePatientData = () =>{
 

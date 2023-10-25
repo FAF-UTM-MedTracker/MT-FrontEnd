@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'antd/es/form/Form';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../redux-toolkit/hooks/hooks';
-import { authReducer, registerUser, userLogin } from '../redux-toolkit/slices/authSlice';
+import { userLogin } from '../redux-toolkit/slices/authSlice';
 
 
 
@@ -16,15 +16,12 @@ const SigninForm: React.FC = () => {
       )
     const dispatch = useAppDispatch()
 
-    const onFinish = async (data: any) => {
+    const onFinish = async () => {
         const { email, uPassword } = await form.validateFields();
         dispatch(userLogin({email, uPassword}))
     };
 
     useEffect(() => {
-        const val = localStorage.getItem('loggedIn')
-        // const authenticated = Boolean(val) ? JSON.parse(val) : false
-
         if (userToken) {
             console.log("logged in")
             navigate('/patients')

@@ -7,14 +7,12 @@ import SignupLayout from './components/SignupLayout.tsx'
 import {
   BrowserRouter as Router,
   Route,
-  Routes,
-  Navigate
+  Routes
 } from "react-router-dom";
 
 import { Provider } from 'react-redux'
 import { store } from './redux-toolkit/store/store'
 import SigninLayout from './components/SigninLayout.tsx';
-import PatientsPage from './components/PatientsPage.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import PageNotFound from './components/PageNotFound.tsx';
 import PatientsPageV2 from './components/PatientsPageV2.tsx';

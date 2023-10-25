@@ -1,15 +1,15 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { useAppSelector } from '../redux-toolkit/hooks/hooks'
 import { Button, Layout, Result } from 'antd';
 
 const { Header, Content, Footer } = Layout;
 
 const ProtectedRoute = () => {
-  const { userInfo, success, userToken } = useAppSelector((state) => state.auth)
+  const { userToken } = useAppSelector((state) => state.auth)
 
   const navigate = useNavigate()
 
-  const onFinish = async (data: any) => {
+  const onFinish = async () => {
       navigate('/login')
   };
 

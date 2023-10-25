@@ -12,6 +12,7 @@ import {
   Empty,
   Spin
 } from 'antd';
+// @ts-ignore
 import * as cloneDeep from 'lodash/cloneDeep';
 import { UserOutlined, 
   MedicineBoxTwoTone, 
@@ -23,7 +24,6 @@ import { UserOutlined,
 } from '@ant-design/icons';
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../redux-toolkit/hooks/hooks';
 import { getTreatments, updateTreatment } from '../redux-toolkit/slices/treatmentSlice';
 import TextArea from 'antd/es/input/TextArea';
@@ -33,7 +33,7 @@ import { getPatientTreatments, getPatients } from '../redux-toolkit/slices/patie
 
 const TreatmentCards: React.FC = () => {
     const {
-    token: { colorBgContainer },
+    token: {},
   } = theme.useToken();
 
 const {patients, patientTreatments} = useAppSelector(
@@ -67,7 +67,6 @@ const {patients, patientTreatments} = useAppSelector(
     return temp;
 }
 
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   useEffect(() => {

@@ -1,10 +1,10 @@
-import { Alert, Button, Form, Input, Space } from 'antd';
+import { Alert, Button, Form, Input} from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'antd/es/form/Form';
 import { useNavigate } from 'react-router-dom';
 import { PasswordInput } from 'antd-password-input-strength';
 import { useAppDispatch, useAppSelector } from '../redux-toolkit/hooks/hooks';
-import { authReducer, registerUser } from '../redux-toolkit/slices/authSlice';
+import { registerUser } from '../redux-toolkit/slices/authSlice';
 import PhoneInput from "antd-phone-input";
 
 
@@ -12,7 +12,7 @@ const SignupForm: React.FC = () => {
     const [form] = useForm()
     const navigate = useNavigate()
 
-    const { loading, userInfo, error, success } = useAppSelector(
+    const { loading,error, success } = useAppSelector(
         (state) => state.auth
       )
 
@@ -25,8 +25,8 @@ const SignupForm: React.FC = () => {
     const errorMessage = 'Password is too weak';
 
 
-    const onFinish = async (data: any) => {
-        const {firstName, lastName, phoneNumber, email, uPassword, confirm_password } = await form.validateFields();
+    const onFinish = async () => {
+        const {firstName, lastName, phoneNumber, email, uPassword} = await form.validateFields();
         dispatch(registerUser({firstName, lastName, email, "phoneNumber":`+${phoneNumber.countryCode }${phoneNumber.areaCode}${phoneNumber.phoneNumber}`,uPassword, "isDoctor":true}))
     };
 

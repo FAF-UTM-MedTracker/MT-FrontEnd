@@ -8,21 +8,20 @@ import {
 import { LogoutOutlined
 } from '@ant-design/icons';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../redux-toolkit/hooks/hooks';
+import { useAppDispatch} from '../redux-toolkit/hooks/hooks';
 import { logout } from '../redux-toolkit/slices/authSlice';
-import { getTreatments, updateTreatment } from '../redux-toolkit/slices/treatmentSlice';
+import { getTreatments} from '../redux-toolkit/slices/treatmentSlice';
 import TreatmentCards from './TreatmentCards';
 import { isMobile } from '../utilities/deviceCheck';
 import { getPatientTreatments, getPatients } from '../redux-toolkit/slices/patientSlice';
-import { combinePatientData } from '../utilities/combinePatientData';
 
 const { Header, Content, Footer } = Layout;
 
 const PatientsPage: React.FC = () => {
     const {
-    token: { colorBgContainer },
+    token: {},
   } = theme.useToken();
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -30,16 +29,6 @@ const PatientsPage: React.FC = () => {
   const onClick =()=> {
     dispatch(logout())
     navigate('/login')
-  }
-
-  const {treatments} = useAppSelector(
-      (state) => state.treatments
-    )
-
-  const onRequest =()=> {
-    dispatch(getTreatments())
-    console.log(treatments);
-    
   }
 
   useEffect(() => {
