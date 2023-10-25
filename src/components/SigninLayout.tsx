@@ -1,6 +1,7 @@
 import {Layout, theme} from 'antd';
 import React from 'react';
 import SigninForm from './SigninForm';
+import { isMobile } from '../utilities/deviceCheck';
 // import styled from 'styled-components';
 
 const { Header, Content, Footer } = Layout;
@@ -33,11 +34,11 @@ const SigninLayout: React.FC = () => {
           <img src="/pill.png" style={{width:'50px', height:'50px', marginRight:'10px', marginTop:'5px', marginLeft:'-30px'}} />
           <b style={{fontSize:'36px', verticalAlign:'top', alignSelf:'center'}}>MedTracker</b>
       </Header>
-      <Content className="site-layout" style={{ padding: '10vh 50px', 
+      <Content className="site-layout" style={{ padding: '10vh 0px', 
       backgroundImage:'linear-gradient(lightblue, white)', 
       display: 'flex', justifyContent:'center'}}>
 
-        <div className='rectangle' style={{display: 'inline-block', 
+        <div className='rectangle' style={!isMobile()?{display: 'inline-block', 
         minHeight:'400px', 
         minWidth:'500px',
         width: 'fit-content', 
@@ -45,9 +46,16 @@ const SigninLayout: React.FC = () => {
         background: 'white',
         margin:'0 auto',
         borderRadius:'50px'
-        
-        
+        }
+        :{display: 'inline-block', 
+          minHeight:'380px', 
+          width: '90vw', 
+          height: 'fit-content',
+          background: 'white',
+          margin:'0 auto',
+          borderRadius:'50px'
         }}>
+
           <h1 style={{color: 'black', textAlign:'center'}}>Sign in</h1>
           <SigninForm/>
         </div>

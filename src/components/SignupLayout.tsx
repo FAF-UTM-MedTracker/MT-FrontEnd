@@ -1,6 +1,7 @@
 import { Layout, theme} from 'antd';
 import React from 'react';
 import SignupForm from './SignupForm';
+import { isMobile } from '../utilities/deviceCheck';
 
 const { Header, Content, Footer } = Layout;
 
@@ -32,17 +33,24 @@ const SignupLayout: React.FC = () => {
           <img src="/pill.png" style={{width:'50px', height:'50px', marginRight:'10px', marginTop:'5px', marginLeft:'-30px'}} />
           <b style={{fontSize:'36px', verticalAlign:'top', alignSelf:'center'}}>MedTracker</b>
       </Header>
-      <Content className="site-layout" style={{ padding: '10vh 50px', 
+      <Content className="site-layout" style={{ padding: '5vh 0px', 
       backgroundImage:'linear-gradient(lightblue, white)', 
       display: 'flex', justifyContent:'center'}}>
 
-        <div className='rectangle' style={{display: 'inline-block', 
+        <div className='rectangle' style={!isMobile()?{display: 'inline-block', 
         minWidth:'500px',
         width: 'fit-content', 
         height: 'fit-content',
         background: 'white',
         margin:'0 auto',
         borderRadius:'50px'
+        }
+        :{display: 'inline-block', 
+          marginTop:'-2vh',
+          width: '93vw', 
+          height: 'fit-content',
+          background: 'white',
+          borderRadius:'50px'
         }}>
           <h1 style={{color: 'black', textAlign:'center'}}>Sign up</h1>
           <SignupForm/>
